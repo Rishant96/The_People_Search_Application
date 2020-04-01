@@ -29,6 +29,10 @@ namespace PeopleSearchApp.Models
         [Column(TypeName = "nvarchar(500)")]
         public string PathToAvatar { get; set; }
 
+        [Required]
+        public int PersonAddressId { get; set; }
+        public virtual PersonAddress Address { get; set; }
+
         public virtual ICollection<PersonInterests> Interests { get; set; }
 
         public override string ToString()
