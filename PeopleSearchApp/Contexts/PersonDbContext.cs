@@ -16,6 +16,5 @@ namespace PeopleSearchApp.Contexts
         }
 
         public DbSet<Person> People { get; set; }
-        public DbSet<PersonInterests> PersonInterests { get; set; }
     }
 }
