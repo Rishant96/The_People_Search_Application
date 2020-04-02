@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PeopleSearchApp.Contexts;
 
 namespace PeopleSearchApp.Migrations
 {
     [DbContext(typeof(PersonDbContext))]
-    partial class PersonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200401180728_IntialWithData")]
+    partial class IntialWithData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,22 +62,6 @@ namespace PeopleSearchApp.Migrations
                             FirstName = "David",
                             LastName = "Johnson",
                             PersonAddressId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DOB = new DateTime(1991, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Ashley",
-                            LastName = "Thompson",
-                            PersonAddressId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DOB = new DateTime(1994, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Varun",
-                            LastName = "Dutt",
-                            PersonAddressId = 3
                         });
                 });
 
@@ -122,25 +108,6 @@ namespace PeopleSearchApp.Migrations
                             Line1 = "1539, Bonnie Rd",
                             State = "North Carolina",
                             ZipCode = "28213"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Charlotte",
-                            Country = "United States",
-                            Line1 = "1624 C, Arlyn Cir",
-                            Line2 = "Margie Ann Rd",
-                            State = "North Carolina",
-                            ZipCode = "28213"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Gurugram",
-                            Country = "India",
-                            Line1 = "House No. 259, Sector 9A",
-                            State = "Haryana",
-                            ZipCode = "122001"
                         });
                 });
 
@@ -176,36 +143,6 @@ namespace PeopleSearchApp.Migrations
                             Id = 2,
                             Interest = "Swimming",
                             PersonId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Interest = "Camping",
-                            PersonId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Interest = "Listening to Music",
-                            PersonId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Interest = "Cooking",
-                            PersonId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Interest = "Playing Video Games",
-                            PersonId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Interest = "Playing Guitar",
-                            PersonId = 3
                         });
                 });
 

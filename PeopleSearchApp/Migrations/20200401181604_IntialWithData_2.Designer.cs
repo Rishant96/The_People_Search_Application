@@ -10,8 +10,8 @@ using PeopleSearchApp.Contexts;
 namespace PeopleSearchApp.Migrations
 {
     [DbContext(typeof(PersonDbContext))]
-    [Migration("20200401152332_Address Added")]
-    partial class AddressAdded
+    [Migration("20200401181604_IntialWithData_2")]
+    partial class IntialWithData_2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace PeopleSearchApp.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -53,6 +53,32 @@ namespace PeopleSearchApp.Migrations
                     b.HasIndex("PersonAddressId");
 
                     b.ToTable("People");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DOB = new DateTime(1982, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "David",
+                            LastName = "Johnson",
+                            PersonAddressId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DOB = new DateTime(1991, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Ashley",
+                            LastName = "Thompson",
+                            PersonAddressId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DOB = new DateTime(1994, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Varun",
+                            LastName = "Dutt",
+                            PersonAddressId = 3
+                        });
                 });
 
             modelBuilder.Entity("PeopleSearchApp.Models.PersonAddress", b =>
@@ -88,9 +114,39 @@ namespace PeopleSearchApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PersonAddress");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Charlotte",
+                            Country = "United States",
+                            Line1 = "1539, Bonnie Rd",
+                            State = "North Carolina",
+                            ZipCode = "28213"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Charlotte",
+                            Country = "United States",
+                            Line1 = "1624 C, Arlyn Cir",
+                            Line2 = "Margie Ann Rd",
+                            State = "North Carolina",
+                            ZipCode = "28213"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Gurugram",
+                            Country = "India",
+                            Line1 = "House No. 259, Sector 9A",
+                            State = "Haryana",
+                            ZipCode = "122001"
+                        });
                 });
 
-            modelBuilder.Entity("PeopleSearchApp.Models.PersonInterests", b =>
+            modelBuilder.Entity("PeopleSearchApp.Models.PersonInterest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,7 +164,51 @@ namespace PeopleSearchApp.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("PersonInterests");
+                    b.ToTable("PersonInterest");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Interest = "Reading Novels",
+                            PersonId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Interest = "Swimming",
+                            PersonId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Interest = "Camping",
+                            PersonId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Interest = "Listening to Music",
+                            PersonId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Interest = "Cooking",
+                            PersonId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Interest = "Playing Video Games",
+                            PersonId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Interest = "Playing Guitar",
+                            PersonId = 3
+                        });
                 });
 
             modelBuilder.Entity("PeopleSearchApp.Models.Person", b =>
@@ -120,7 +220,7 @@ namespace PeopleSearchApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PeopleSearchApp.Models.PersonInterests", b =>
+            modelBuilder.Entity("PeopleSearchApp.Models.PersonInterest", b =>
                 {
                     b.HasOne("PeopleSearchApp.Models.Person", null)
                         .WithMany("Interests")

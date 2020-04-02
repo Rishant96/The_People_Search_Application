@@ -15,6 +15,17 @@ namespace PeopleSearchApp.Contexts
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PersonAddressConfiguration());
+            modelBuilder.ApplyConfiguration(new PersonConfiguration());
+            modelBuilder.ApplyConfiguration(new PersonInterestsConfiguration());
+        }
+
         public DbSet<Person> People { get; set; }
+
+        public DbSet<PeopleSearchApp.Models.PersonAddress> PersonAddress { get; set; }
+
+        public DbSet<PeopleSearchApp.Models.PersonInterest> PersonInterest { get; set; }
     }
 }

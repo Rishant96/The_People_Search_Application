@@ -19,6 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,23 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200401145636_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200401145636_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200401152332_Address Added.cs" />
+    <Compile Remove="Migrations\20200401152332_Address Added.Designer.cs" />
+    <Compile Remove="Migrations\20200401164051_Date type added.cs" />
+    <Compile Remove="Migrations\20200401164051_Date type added.Designer.cs" />
+    <Compile Remove="Migrations\20200401164540_Initial Create Step.cs" />
+    <Compile Remove="Migrations\20200401164540_Initial Create Step.Designer.cs" />
+    <Compile Remove="Migrations\20200401164854_Initial Create Step.cs" />
+    <Compile Remove="Migrations\20200401164854_Initial Create Step.Designer.cs" />
+    <Compile Remove="Migrations\20200401180049_IntialWithData.cs" />
+    <Compile Remove="Migrations\20200401180049_IntialWithData.Designer.cs" />
+    <Compile Remove="Migrations\20200401180541_IntialWithData_2.cs" />
+    <Compile Remove="Migrations\20200401180541_IntialWithData_2.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

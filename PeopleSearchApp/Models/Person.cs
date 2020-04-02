@@ -24,6 +24,8 @@ namespace PeopleSearchApp.Models
         public string LastName { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime DOB { get; set; }
 
         [Column(TypeName = "nvarchar(500)")]
@@ -33,7 +35,7 @@ namespace PeopleSearchApp.Models
         public int PersonAddressId { get; set; }
         public virtual PersonAddress Address { get; set; }
 
-        public virtual ICollection<PersonInterests> Interests { get; set; }
+        public virtual ICollection<PersonInterest> Interests { get; set; }
 
         public override string ToString()
         {
