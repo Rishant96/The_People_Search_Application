@@ -33,11 +33,19 @@ namespace PeopleSearchApp
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PersonDbContext dbContext)
         {
+            app.UseCors(options => 
+                options.WithOrigins("http://localhost:44301/")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            );
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
