@@ -26,27 +26,46 @@ namespace PeopleSearchApp.Controllers
 
         // GET: api/People
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        public async Task<ActionResult<IEnumerable<PersonDTO>>> GetPeople()
         {
-            return await _context.People
-                .Include(p => p.Address)
-                .Include(p => p.Interests)
-                .ToListAsync();
+            var people_dto = await _context.People
+                        .Include(p => p.Address)
+                        .Include(p => p.Interests)
+                        .Select(p => PersonToDTO(p))
+                        .ToListAsync();
+
+            for (int i=0; i < people_dto.Count; i++)
+            {
+                people_dto[i].Age = DateTime.Now.Year - people_dto[i].DOB.Year;
+                if (DateTime.Now.DayOfYear < people_dto[i].DOB.DayOfYear)
+                {
+                    people_dto[i].Age -= 1;
+                }
+            }
+
+            return people_dto;
         }
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        public async Task<ActionResult<PersonDTO>> GetPerson(int id)
         {
-            var person = await _context.People
+            var person_m = await _context.People
                 .Include(p => p.Address)
                 .Include(p => p.Interests)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (person == null)
+            if (person_m == null)
             {
                 return NotFound();
             }
+
+            var person = PersonToDTO(person_m);
+            person.Age = DateTime.Now.Year - person.DOB.Year;
+            if (DateTime.Now.DayOfYear < person.DOB.DayOfYear)
+            {
+                person.Age -= 1;
+            } 
 
             return person;
         }
@@ -55,18 +74,34 @@ namespace PeopleSearchApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(int id, Person person)
+        public async Task<IActionResult> PutPerson(int id, PersonDTO personDTO)
         {
-            person.Id = id;
+            if (id != personDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            var person = await _context.People
+                .Include(p => p.Address)
+                .Include(p => p.Interests)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            person.FirstName = personDTO.FirstName;
+            person.MiddleName = personDTO.MiddleName;
+            person.LastName = personDTO.LastName;
+            person.Address = personDTO.Address;
+            person.PersonAddressId = personDTO.PersonAddressId;
+            person.DOB = new DateTime(personDTO.DOB.Year, personDTO.DOB.Month, personDTO.DOB.Day);
+            person.PathToAvatar = personDTO.PathToAvatar;
 
             _context.Entry(person).State = EntityState.Modified;
-            if (person.Address != null)
+            if (personDTO.Address != null)
             {
-                _context.Entry(person.Address).State = EntityState.Modified;
+                _context.Entry(personDTO.Address).State = EntityState.Modified;
             }
-            if (person.Interests != null)
+            if (personDTO.Interests != null)
             {
-                foreach (var interest in person.Interests) 
+                foreach (var interest in personDTO.Interests) 
                 {
                     _context.Entry(interest).State = EntityState.Modified;
                 }
@@ -156,5 +191,20 @@ namespace PeopleSearchApp.Controllers
         {
             return _context.People.Any(e => e.Id == id);
         }
+
+        private static PersonDTO PersonToDTO(Person person) =>
+            new PersonDTO
+            {
+                Id = person.Id,
+                FirstName = person.FirstName,
+                MiddleName = person.MiddleName,
+                LastName = person.LastName,
+                Address = person.Address,
+                PersonAddressId = person.PersonAddressId,
+                PathToAvatar = person.PathToAvatar,
+                Age = 0,
+                DOB = person.DOB.Date,
+                Interests = person.Interests
+            };
     }
 }

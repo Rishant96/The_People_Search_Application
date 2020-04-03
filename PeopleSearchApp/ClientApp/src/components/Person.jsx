@@ -24,7 +24,7 @@ const Person = (props) => {
     };
 
     return (
-      <Card style={{ maxWidth: "300px", margin: "auto", marginBottom: "30px" }}>
+      <Card style={{ maxWidth: "300px", margin: "auto", marginBottom: "50px" }}>
         <CardHeader>Person #{props.id}</CardHeader>
         <CardImg src="https://place-hold.it/300x200" />
         <CardBody>
@@ -36,7 +36,7 @@ const Person = (props) => {
                 { NumInterests } interests
               </Badge>  
             </div>
-            <Button onClick={onMoreClick} style={{ marginRight: "5px" }}>
+            <Button pill onClick={onMoreClick} style={{ marginRight: "5px" }}>
                 More &rarr;
             </Button>
           </div>

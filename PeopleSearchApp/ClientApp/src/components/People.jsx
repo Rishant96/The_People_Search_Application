@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import * as actions from "../actions/person";
 import { Container, Row, Col } from "shards-react";
 import Person from "./Person";
+import PersonDetailed from "./PersonDetailed";
+import SearchBar from "./SearchBar";
 
 const People = (props) => {
     const [currIndex, setIndex] = useState(0);
@@ -11,10 +13,16 @@ const People = (props) => {
         setIndex(id);
     };
 
+    const handleLessClick = id => {
+        setIndex(0);
+    };
+
     useEffect(() => {
         props.fetchAllPeople()
     }, []);
 
+
+    let primaryPerson = null;
     const peopleCards = [];
 
     props.peopleList.forEach((person) => {
@@ -26,18 +34,22 @@ const People = (props) => {
             );
         }
         else {
-            peopleCards.push(
+             primaryPerson = (
               <Col sm="12" key={ person.id }>
-                <Person {...person} handleMoreClick={handleMoreClick} />
+                <PersonDetailed {...person} handleLessClick={handleLessClick} />
               </Col>
             );
         }
     });
 
     return (
-      <Container>
+      <Container style={{  }}>
+        <SearchBar />
         <Row>
-          { peopleCards }
+          { primaryPerson }
+        </Row>
+        <Row>
+            { peopleCards }
         </Row>
       </Container>
     );
