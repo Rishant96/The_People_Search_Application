@@ -28,10 +28,6 @@ const PersonDetailed = (props) => {
         props.handleLessClick(props.id);
     };
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [props.id]);
-
     const btnToggle = () => {
       setToggle(!toggle);
     }

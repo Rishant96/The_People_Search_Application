@@ -22,7 +22,6 @@ const People = (props) => {
     }, []);
 
 
-    let primaryPerson = null;
     const peopleCards = [];
 
     props.peopleList.forEach((person) => {
@@ -34,7 +33,7 @@ const People = (props) => {
             );
         }
         else {
-             primaryPerson = (
+             peopleCards.push(
               <Col sm="12" key={ person.id }>
                 <PersonDetailed {...person} handleLessClick={handleLessClick} />
               </Col>
@@ -43,11 +42,8 @@ const People = (props) => {
     });
 
     return (
-      <Container style={{  }}>
+      <Container>
         <SearchBar />
-        <Row>
-          { primaryPerson }
-        </Row>
         <Row>
             { peopleCards }
         </Row>

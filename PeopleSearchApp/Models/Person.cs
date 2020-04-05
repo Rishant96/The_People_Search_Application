@@ -35,6 +35,9 @@ namespace PeopleSearchApp.Models
         public int PersonAddressId { get; set; }
         public virtual PersonAddress Address { get; set; }
 
+        [Required]
+        public bool IsFavorite { get; set; }
+
         public virtual ICollection<PersonInterest> Interests { get; set; }
 
         public override string ToString()

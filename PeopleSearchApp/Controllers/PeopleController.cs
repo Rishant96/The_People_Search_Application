@@ -93,6 +93,7 @@ namespace PeopleSearchApp.Controllers
             person.PersonAddressId = personDTO.PersonAddressId;
             person.DOB = new DateTime(personDTO.DOB.Year, personDTO.DOB.Month, personDTO.DOB.Day);
             person.PathToAvatar = personDTO.PathToAvatar;
+            person.IsFavorite = personDTO.IsFavorite;
 
             _context.Entry(person).State = EntityState.Modified;
             if (personDTO.Address != null)
@@ -204,7 +205,8 @@ namespace PeopleSearchApp.Controllers
                 PathToAvatar = person.PathToAvatar,
                 Age = 0,
                 DOB = person.DOB.Date,
-                Interests = person.Interests
+                Interests = person.Interests,
+                IsFavorite = person.IsFavorite
             };
     }
 }
