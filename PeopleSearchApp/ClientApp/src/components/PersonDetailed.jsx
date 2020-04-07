@@ -12,6 +12,7 @@ import {
   ListGroup,
   ListGroupItem
 } from "shards-react";
+import PersonCardHeader from "./PersonCardHeader";
 
 const PersonDetailed = (props) => {
     const [toggle, setToggle] = useState(false);
@@ -41,7 +42,7 @@ const PersonDetailed = (props) => {
 
     return (
       <Card style={{ maxWidth: "800px", margin: "auto", marginBottom: "30px" }}>
-        <CardHeader>Person #{props.id}</CardHeader>
+        <PersonCardHeader  id= { props.id } isStar={ props.isFavorite } />
         <div style={{ display: "Flex" }}>
           <div style={{ maxWidth: "300", maxHeight: "200",
                         marginTop: "10px", marginLeft: "10px", marginBottom: "10px" }}>

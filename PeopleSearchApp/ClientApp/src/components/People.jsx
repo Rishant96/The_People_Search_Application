@@ -24,7 +24,24 @@ const People = (props) => {
 
     const peopleCards = [];
 
-    props.peopleList.forEach((person) => {
+    const peopleList = props.peopleList.sort((a, b) => {
+        if (a.isFavorite || b.isFavorite) {
+            if (a.isFavorite && b.isFavorite) {
+                return a.firstName - b.firstName;
+            }
+            else if (a.isFavorite) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        }
+        else {
+            return a.firstName - b.firstName;
+        }
+    });
+
+    peopleList.forEach((person) => {
         if (currIndex != person.id) {
             peopleCards.push(
               <Col sm="6" key={ person.id }>

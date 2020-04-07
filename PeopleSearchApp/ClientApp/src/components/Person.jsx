@@ -9,6 +9,7 @@ import {
   Button,
   Badge
 } from "shards-react";
+import PersonCardHeader from "./PersonCardHeader";
 
 const Person = (props) => {
     const FullName = (props.middleName == null) 
@@ -25,7 +26,7 @@ const Person = (props) => {
 
     return (
       <Card style={{ maxWidth: "300px", margin: "auto", marginBottom: "50px" }}>
-        <CardHeader>Person #{props.id}</CardHeader>
+        <PersonCardHeader id= { props.id } isStar={ props.isFavorite } />
         <CardImg src="https://place-hold.it/300x200" />
         <CardBody>
           <CardTitle>{ FullName }</CardTitle>
